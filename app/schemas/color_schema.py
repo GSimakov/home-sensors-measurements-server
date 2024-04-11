@@ -1,3 +1,4 @@
+import datetime
 from uuid import UUID
 from app import models
 
@@ -12,4 +13,4 @@ class IColorCreate(base_model):
 
 class IColorRead(base_model):
     id: UUID
-
+    created_at: datetime.datetime

@@ -1,4 +1,5 @@
 from uuid import UUID
+import datetime
 from app import models
 
 __all__ = ['ILightCreate', 'ILightRead']
@@ -12,3 +13,4 @@ class ILightCreate(base_model):
 
 class ILightRead(base_model):
     id: UUID
+    created_at: datetime.datetime

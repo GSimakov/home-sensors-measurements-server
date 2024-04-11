@@ -1,4 +1,5 @@
 from uuid import UUID
+import datetime
 from app import models
 
 __all__ = ['IHumidityCreate', 'IHumidityRead']
@@ -12,3 +13,4 @@ class IHumidityCreate(base_model):
 
 class IHumidityRead(base_model):
     id: UUID
+    created_at: datetime.datetime

@@ -1,5 +1,6 @@
 from uuid import UUID
 from app import models
+import datetime
 
 __all__ = ['ISGACreate', 'ISGARead']
 
@@ -12,3 +13,4 @@ class ISGACreate(base_model):
 
 class ISGARead(base_model):
     id: UUID
+    created_at: datetime.datetime

@@ -1,3 +1,4 @@
+import datetime
 from uuid import UUID
 from app import models
 
@@ -12,3 +13,4 @@ class IFALCreate(base_model):
 
 class IFALRead(base_model):
     id: UUID
+    created_at: datetime.datetime
