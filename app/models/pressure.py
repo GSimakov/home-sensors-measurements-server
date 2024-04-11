@@ -1,14 +1,10 @@
 from app.utils.base_measurement_model import *
 from app.utils.base_model import BaseEntityModel
 
-__all__ = ['BasePressure', 'PressureUpdate', 'Pressure']
+__all__ = ['BasePressure', 'Pressure']
 
 
 class BasePressure(BaseMeasurement):
-    pass
-
-
-class PressureUpdate(BaseMeasurementUpdate):
     pass
 
 

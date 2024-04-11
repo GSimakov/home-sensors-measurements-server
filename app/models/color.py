@@ -1,14 +1,10 @@
 from app.utils.base_measurement_model import *
 from app.utils.base_model import BaseEntityModel
 
-__all__ = ['BaseColor', 'ColorUpdate', 'Color']
+__all__ = ['BaseColor', 'Color']
 
 
 class BaseColor(BaseMeasurement):
-    pass
-
-
-class ColorUpdate(BaseMeasurementUpdate):
     pass
 
 

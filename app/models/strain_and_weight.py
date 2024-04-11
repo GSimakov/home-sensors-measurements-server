@@ -1,14 +1,10 @@
 from app.utils.base_measurement_model import *
 from app.utils.base_model import BaseEntityModel
 
-__all__ = ['BaseSAW', 'SAWUpdate', 'StrainAndWeight']
+__all__ = ['BaseSAW', 'StrainAndWeight']
 
 
 class BaseSAW(BaseMeasurement):
-    pass
-
-
-class SAWUpdate(BaseMeasurementUpdate):
     pass
 
 

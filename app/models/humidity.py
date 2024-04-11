@@ -1,14 +1,10 @@
 from app.utils.base_measurement_model import *
 from app.utils.base_model import BaseEntityModel
 
-__all__ = ['BaseHumidity', 'HumidityUpdate', 'Humidity']
+__all__ = ['BaseHumidity', 'Humidity']
 
 
 class BaseHumidity(BaseMeasurement):
-    pass
-
-
-class HumidityUpdate(BaseMeasurementUpdate):
     pass
 
 

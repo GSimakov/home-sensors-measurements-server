@@ -1,14 +1,10 @@
 from app.utils.base_measurement_model import *
 from app.utils.base_model import BaseEntityModel
 
-__all__ = ['BaseSGA', 'SGAUpdate', 'SmokeGasAlcohol']
+__all__ = ['BaseSGA', 'SmokeGasAlcohol']
 
 
 class BaseSGA(BaseMeasurement):
-    pass
-
-
-class SGAUpdate(BaseMeasurementUpdate):
     pass
 
 
