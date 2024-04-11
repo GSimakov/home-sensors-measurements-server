@@ -15,10 +15,9 @@ from app.utils.session import session_manager
 
 DefaultModelType = TypeVar("DefaultModelType", bound=SQLModel)
 CreateSchemaType = TypeVar("CreateSchemaType", bound=BaseModel)
-UpdateSchemaType = TypeVar("UpdateSchemaType", bound=BaseModel)
 
 
-class CRUDBase(Generic[DefaultModelType, CreateSchemaType, UpdateSchemaType]):
+class CRUDBase(Generic[DefaultModelType, CreateSchemaType]):
     def __init__(self, model: type[DefaultModelType]):
         self.model = model
 
@@ -98,30 +97,6 @@ class CRUDBase(Generic[DefaultModelType, CreateSchemaType, UpdateSchemaType]):
         return db_obj
 
     @session_manager
-    async def update(
-        self,
-        session: AsyncSession,
-        obj_current: DefaultModelType,
-        obj_new: UpdateSchemaType | dict[str, Any] | DefaultModelType,
-    ) -> DefaultModelType:
-        obj_data = jsonable_encoder(obj_current)
-
-        if isinstance(obj_new, dict):
-            update_data = obj_new
-        else:
-            update_data = obj_new.dict(
-                exclude_unset=True
-            )  # This tells Pydantic to not include the values that were not sent
-        for field in obj_data:
-            if field in update_data:
-                setattr(obj_current, field, update_data[field])
-
-        session.add(obj_current)
-        await session.commit()
-        await session.refresh(obj_current)
-        return obj_current
-
-    @session_manager
     async def remove(
             self,
             session: AsyncSession,
@@ -134,5 +109,3 @@ class CRUDBase(Generic[DefaultModelType, CreateSchemaType, UpdateSchemaType]):
         await session.delete(obj)
         await session.commit()
         return obj
-
-#todo передать все операции сессии session_manager, кроме выполнения запроса
