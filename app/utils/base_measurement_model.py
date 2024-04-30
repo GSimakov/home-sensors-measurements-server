@@ -2,14 +2,11 @@ from uuid import UUID
 from sqlmodel import SQLModel, Field, Relationship
 
 
-__all__ = ['BaseMeasurement', 'BaseMeasurementUpdate']
+__all__ = ['BaseMeasurement']
 
 
 class BaseMeasurement(SQLModel):
-    DAS_id: UUID | None
+    hardware_id: str
     indication: str
+    unit: str
 
-
-class BaseMeasurementUpdate(BaseMeasurement):
-    DAS_id: UUID | None = None
-    indication: str | None = None
