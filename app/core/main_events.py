@@ -3,7 +3,7 @@ from fastapi import FastAPI
 from loguru import logger
 
 from app.utils.insert_test_data import insert
-from app.utils.graph import graph
+from app.utils.graphs import graph
 
 
 
