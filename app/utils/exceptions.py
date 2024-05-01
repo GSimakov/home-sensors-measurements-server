@@ -6,6 +6,29 @@ from sqlmodel import SQLModel
 ModelType = TypeVar("ModelType", bound=SQLModel)
 
 
+class ResultIsEmptyException(HTTPException, Generic[ModelType]):
+    def __init__(
+        self,
+        model: Type[ModelType],
+        param: str,
+        param_value: Any,
+        headers: Optional[Dict[str, Any]] = None,
+    ) -> None:
+        if param:
+            super().__init__(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail=f"Unable to find the {model.__name__} list with param {param}={param_value}.",
+                headers=headers,
+            )
+            return
+
+        super().__init__(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"{model.__name__} list not found.",
+            headers=headers,
+        )
+
+
 class ContentNoChangeException(HTTPException):
     def __init__(
         self,

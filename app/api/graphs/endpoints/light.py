@@ -1,6 +1,10 @@
 from fastapi import APIRouter, Depends
 from fastapi.responses import FileResponse
 from starlette.background import BackgroundTask
+from typing import Annotated
+from annotated_types import Len
+
+
 
 from app import crud
 from app import models
@@ -23,6 +27,9 @@ async def get_light_graph(
     """
     Gets a graphs of light measurements
     """
+
+
+
     file_path, file_name = await graph(
         measurements=current_measurements
     )

@@ -1,10 +1,8 @@
-from uuid import UUID
-from fastapi import Query, Body, Path
-from typing_extensions import Annotated
+from fastapi import Query
 
 from app import crud
 from app import models
-from app.utils.exceptions import IdNotFoundException
+from app.utils.exceptions import ResultIsEmptyException
 
 __all__ = ['get_light_multi_by_hardware_id_from_query']
 
@@ -18,4 +16,7 @@ async def get_light_multi_by_hardware_id_from_query(
         hardware_id: str = Query(description=HID_param_description),
         limit: int = Query(default=50, description=limit_param_description)
 ) -> list:
-    return await crud_repo.get_multi_by_hardware_id(hardware_id=hardware_id, limit=limit)
+    response = await crud_repo.get_multi_by_hardware_id(hardware_id=hardware_id, limit=limit)
+    if not response:
+        raise ResultIsEmptyException(model=model, param='hardware_id', param_value=hardware_id)
+    return response
