@@ -21,8 +21,6 @@ async def graph(
     y = []
     graph = plt #todo optimization
 
-    iter = 0
-
     measurements = await current_repo.get_multi_by_hardware_id(hardware_id=hardware_id, limit=limit)
     for measurement in measurements:
         y.append(round(float(measurement.indication), 2))
@@ -33,10 +31,11 @@ async def graph(
     graph.yticks(np.arange(min(y), max(y) + 1, 0.5))
     graph.ylabel(ylabel="Показания ({})".format(measurements[0].unit), loc='top')
     graph.xlabel(xlabel="Время", loc="left")
+    graph.tight_layout()
     graph.plot(x, y)
     graph.xticks(rotation=90)
 
     file_name = '{}-{}_{}.png'.format(min(x), max(x), measurements[0].hardware_id)
-    file_path = './pictures/' + file_name
-    graph.savefig(file_path)
+    file_path = './temp/' + file_name
+    graph.savefig(file_path, bbox_inches='tight', dpi=100)
     return file_path, file_name

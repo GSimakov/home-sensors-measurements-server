@@ -1,21 +1,9 @@
 from fastapi import APIRouter, Depends
 from fastapi.responses import FileResponse
 
-from app import schemas
-from app import models
 from app import crud
-from app.api.data import dependencies as deps
-from app.utils.graph_params import GraphParams
-from app.utils.graph import graph
-
-from app.schemas.response_schema import (
-    IPostResponseBase,
-    create_response,
-    IGetResponsePaginated,
-    IGetResponseBase,
-    IDeleteResponseBase,
-    IPutResponseBase
-)
+from app.utils.graphs.graph_params import GraphParams
+from app.utils.graphs import graph
 
 router = APIRouter()
 crud_repo = crud.color
@@ -26,7 +14,7 @@ async def get_color_graph(
         params: GraphParams = Depends(),
 ):
     """
-    Gets a graph of color measurements
+    Gets a graphs of color measurements
     """
     file_path, file_name = await graph(
         limit=params.limit,

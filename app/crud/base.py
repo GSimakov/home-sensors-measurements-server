@@ -8,7 +8,7 @@ from pydantic import BaseModel
 from sqlmodel import SQLModel, select, func
 from sqlmodel.ext.asyncio.session import AsyncSession
 from sqlmodel.sql.expression import Select
-from sqlalchemy import exc
+from sqlalchemy import exc, desc, asc
 
 from app.utils.session import session_manager
 
@@ -74,7 +74,7 @@ class CRUDBase(Generic[DefaultModelType, CreateSchemaType]):
         query = (select(self.model).
                  where(self.model.hardware_id == hardware_id)
                  .offset(skip).limit(limit)
-                 .order_by(self.model.created_at))
+                 .order_by(desc(self.model.created_at)))
         response = await session.execute(query)
         return response.scalars().all()
 
