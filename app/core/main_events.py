@@ -2,6 +2,9 @@ from typing import Callable
 from fastapi import FastAPI
 from loguru import logger
 
+from app.utils.insert_test_data import insert
+from app.utils.graph import graph
+
 
 
 #todo fix api routes
@@ -9,7 +12,7 @@ def create_start_app_handler(
     app: FastAPI,
 ) -> Callable:
     async def start_app() -> None:
-        pass
+        await insert()
     return start_app
 
 

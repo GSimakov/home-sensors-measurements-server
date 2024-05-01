@@ -12,10 +12,10 @@ from app.core.logging import InterceptHandler
 
 
 class AppSettings(BaseSettings):
-    API_VERSION: str = "v1"
+    API_VERSION: str = "data"
 
-    API_DAS_STR: str = f"/api/{API_VERSION}"
-    API_USER_STR: str = f"/api/{API_VERSION}"
+    API_DATA_STR: str = f"/api/data"
+    API_GRAPHS_STR: str = f"/api/graphs"
 
 
     PROJECT_NAME: str = "home-sensors-data"
