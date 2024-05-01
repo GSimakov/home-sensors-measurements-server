@@ -8,8 +8,8 @@ from app.utils.exceptions import IdNotFoundException
 
 __all__ = ['get_fal_by_id_from_path', 'get_fal_by_id_from_query']
 
-model = models.FlawAndLevel
-crud_repo = crud.flaw_and_level
+model = models.FlowAndLevel
+crud_repo = crud.flow_and_level
 id_param_description = 'The UUID id of the FAL measurement'
 
 

@@ -6,7 +6,7 @@ from app import schemas
 from app import models
 from app.utils.session import session_manager
 
-model = models.FlawAndLevel
+model = models.FlowAndLevel
 create_schema = schemas.IFALCreate
 
 
@@ -14,4 +14,4 @@ class CRUDFAL(CRUDBase[model, create_schema]):
     pass
 
 
-flaw_and_level = CRUDFAL(model=model)
+flow_and_level = CRUDFAL(model=model)

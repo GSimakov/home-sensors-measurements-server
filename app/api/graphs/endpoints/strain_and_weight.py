@@ -10,22 +10,20 @@ from app.utils.graphs.graph import graph
 from app.utils.cleanup import cleanup
 
 router = APIRouter()
-crud_repo = crud.light
-model = models.Light
-deps_from_query = deps.get_light_multi_by_hardware_id_from_query
+crud_repo = crud.strain_and_weight
+model = models.StrainAndWeight
+deps_from_query = deps.get_SAW_multi_by_hardware_id_from_query
 
 
 @router.get("")
-async def get_light_graph(
+async def get_SAW_graph(
         current_measurements: list[model] = Depends(
             deps_from_query
         ),
 ) -> FileResponse:
     """
-    Gets a graphs of light measurements
+    Gets a graphs of SAW measurements
     """
-
-
 
     file_path, file_name = await graph(
         measurements=current_measurements

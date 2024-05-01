@@ -6,8 +6,8 @@ from app.utils.exceptions import ResultIsEmptyException
 
 __all__ = ['get_faw_multi_by_hardware_id_from_query']
 
-model = models.FlawAndLevel
-crud_repo = crud.flaw_and_level
+model = models.FlowAndLevel
+crud_repo = crud.flow_and_level
 HID_param_description = 'Hardware ID of the measurements source'
 limit_param_description = 'Number of measurements from last record"'
 

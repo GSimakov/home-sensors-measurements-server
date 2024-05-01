@@ -5,3 +5,4 @@ from .pressure_deps import *
 from .humidity_deps import *
 from .flow_and_level_deps import *
 from .temperature_deps import *
+from .color_deps import *

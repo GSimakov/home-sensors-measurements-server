@@ -18,10 +18,10 @@ from app.schemas.response_schema import (
 router = APIRouter()
 
 obj_in_message = 'Flow And Level'
-model = models.FlawAndLevel
+model = models.FlowAndLevel
 read_schema = schemas.IFALRead
 create_schema = schemas.IFALCreate
-crud_repo = crud.flaw_and_level
+crud_repo = crud.flow_and_level
 deps_from_path = deps.get_fal_by_id_from_path
 
 
