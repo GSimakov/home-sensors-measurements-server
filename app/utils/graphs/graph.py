@@ -10,9 +10,7 @@ from app.utils.date_format import DateFormat
 
 
 async def graph(
-        limit: int,
-        hardware_id: str,
-        current_repo: CRUDBase,
+        measurements: list,
         date_format: str = DateFormat.YMDHMSM,
 
 ):
@@ -21,7 +19,7 @@ async def graph(
     y = []
     graph = plt #todo optimization
 
-    measurements = await current_repo.get_multi_by_hardware_id(hardware_id=hardware_id, limit=limit)
+
     for measurement in measurements:
         y.append(round(float(measurement.indication), 2))
         x.append(str(measurement.created_at.strftime(date_format)[:-3]))
@@ -36,6 +34,6 @@ async def graph(
     graph.xticks(rotation=90)
 
     file_name = '{}-{}_{}.png'.format(min(x), max(x), measurements[0].hardware_id)
-    file_path = './temp/' + file_name
+    file_path = './tmp/' + file_name
     graph.savefig(file_path, bbox_inches='tight', dpi=100)
     return file_path, file_name

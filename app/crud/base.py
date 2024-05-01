@@ -78,7 +78,6 @@ class CRUDBase(Generic[DefaultModelType, CreateSchemaType]):
         response = await session.execute(query)
         return response.scalars().all()
 
-
     @session_manager
     async def get_multi_paginated(
         self,
