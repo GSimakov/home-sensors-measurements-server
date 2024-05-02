@@ -1,4 +1,4 @@
-from fastapi import APIRouter, status, Depends
+from fastapi import APIRouter, status, Depends, Query
 from fastapi_pagination import Params
 
 from app import schemas
@@ -35,17 +35,16 @@ async def read_color_list(
     return create_response(data=response)
 
 
-# @router.get("/list_by_HID/")
-# async def read_color_list_by_hardware_id(
-#         current_measurements: list[model] = Depends(
-#             deps_from_path
-#         ),
-#         params: Params = Depends(),
-# ) -> IGetResponsePaginated[read_schema]:
-#     """
-#     Gets a paginated list of color measurements
-#     """
-#     return create_response(data=current_measurements)
+@router.get("/list_hid")
+async def read_color_list_by_hardware_id(
+        hardware_id: str = Query(description='Hardware ID of the measurements source'),
+        params: Params = Depends(),
+) -> IGetResponsePaginated[read_schema]:
+    """
+    Gets a paginated list of color measurements by hardware id
+    """
+    response = await crud_repo.get_multi_paginated_by_hardware_id(params=params, hardware_id=hardware_id)
+    return create_response(data=response)
 
 
 @router.get("/{id}")

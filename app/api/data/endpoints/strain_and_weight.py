@@ -1,4 +1,4 @@
-from fastapi import APIRouter, status, Depends
+from fastapi import APIRouter, status, Depends, Query
 from fastapi_pagination import Params
 
 from app import schemas
@@ -33,6 +33,18 @@ async def read_strain_and_weight_list(
     Gets a paginated list of strain and weight measurements
     """
     response = await crud_repo.get_multi_paginated(params=params)
+    return create_response(data=response)
+
+
+@router.get("/list_hid")
+async def read_strain_and_weight_list_by_hardware_id(
+        hardware_id: str = Query(description='Hardware ID of the measurements source'),
+        params: Params = Depends(),
+) -> IGetResponsePaginated[read_schema]:
+    """
+    Gets a paginated list of strain and weight measurements by hardware id
+    """
+    response = await crud_repo.get_multi_paginated_by_hardware_id(params=params, hardware_id=hardware_id)
     return create_response(data=response)
 
 

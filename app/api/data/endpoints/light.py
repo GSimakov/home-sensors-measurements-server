@@ -47,6 +47,7 @@ async def read_light_list_by_hardware_id(
     response = await crud_repo.get_multi_paginated_by_hardware_id(params=params, hardware_id=hardware_id)
     return create_response(data=response)
 
+
 @router.get("/{id}")
 async def get_light_by_id(
         current: model = Depends(
