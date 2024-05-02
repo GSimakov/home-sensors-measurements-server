@@ -9,7 +9,7 @@ __all__ = ['get_color_multi_by_hardware_id_from_query']
 model = models.Color
 crud_repo = crud.color
 HID_param_description = 'Hardware ID of the measurements source'
-limit_param_description = 'Number of measurements from last record"'
+limit_param_description = 'Number of measurements from last record'
 
 
 async def get_color_multi_by_hardware_id_from_query(

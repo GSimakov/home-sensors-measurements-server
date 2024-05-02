@@ -9,7 +9,7 @@ __all__ = ['get_light_multi_by_hardware_id_from_query']
 model = models.Light
 crud_repo = crud.light
 HID_param_description = 'Hardware ID of the measurements source'
-limit_param_description = 'Number of measurements from last record"'
+limit_param_description = 'Number of measurements from last record'
 
 
 async def get_light_multi_by_hardware_id_from_query(

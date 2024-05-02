@@ -9,7 +9,7 @@ __all__ = ['get_SAW_multi_by_hardware_id_from_query']
 model = models.StrainAndWeight
 crud_repo = crud.strain_and_weight
 HID_param_description = 'Hardware ID of the measurements source'
-limit_param_description = 'Number of measurements from last record"'
+limit_param_description = 'Number of measurements from last record'
 
 
 async def get_SAW_multi_by_hardware_id_from_query(

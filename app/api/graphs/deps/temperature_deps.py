@@ -9,7 +9,7 @@ __all__ = ['get_temperature_multi_by_hardware_id_from_query']
 model = models.Temperature
 crud_repo = crud.temperature
 HID_param_description = 'Hardware ID of the measurements source'
-limit_param_description = 'Number of measurements from last record"'
+limit_param_description = 'Number of measurements from last record'
 
 
 async def get_temperature_multi_by_hardware_id_from_query(
