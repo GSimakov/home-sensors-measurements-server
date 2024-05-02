@@ -84,7 +84,17 @@ class CRUDBase(Generic[DefaultModelType, CreateSchemaType]):
         session: AsyncSession,
         params: Params | None = Params(),
     ) -> Page[DefaultModelType]:
-        query = select(self.model)
+        query = select(self.model).order_by(desc(self.model.created_at))
+        return await paginate(session, query, params)
+
+    @session_manager
+    async def get_multi_paginated_by_hardware_id(
+        self,
+        session: AsyncSession,
+        hardware_id: str,
+        params: Params | None = Params(),
+    ) -> Page[DefaultModelType]:
+        query = select(self.model).where(self.model.hardware_id == hardware_id).order_by(desc(self.model.created_at))
         return await paginate(session, query, params)
 
     @session_manager

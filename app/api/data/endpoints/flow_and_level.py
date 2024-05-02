@@ -4,15 +4,14 @@ from fastapi_pagination import Params
 from app import schemas
 from app import models
 from app import crud
-from app.api.data import deps as deps
+from app.api.data import deps
 
 from app.schemas.response_schema import (
     IPostResponseBase,
     create_response,
     IGetResponsePaginated,
     IGetResponseBase,
-    IDeleteResponseBase,
-    IPutResponseBase
+    IDeleteResponseBase
 )
 
 router = APIRouter()
@@ -22,7 +21,7 @@ model = models.FlowAndLevel
 read_schema = schemas.IFALRead
 create_schema = schemas.IFALCreate
 crud_repo = crud.flow_and_level
-deps_from_path = deps.get_fal_by_id_from_path
+deps_by_id = deps.get_fal_by_id_from_path
 
 
 @router.get("/list")
@@ -39,7 +38,7 @@ async def read_fav_list(
 @router.get("/{id}")
 async def get_fav_by_id(
         current: model = Depends(
-            deps_from_path
+            deps_by_id
         ),
 ) -> IGetResponseBase[read_schema]:
     """
@@ -62,7 +61,7 @@ async def create_fav(
 @router.delete("/{id}")
 async def remove_fav(
         current: model = Depends(
-            deps_from_path
+            deps_by_id
         ),
 ) -> IDeleteResponseBase[read_schema]:
     """

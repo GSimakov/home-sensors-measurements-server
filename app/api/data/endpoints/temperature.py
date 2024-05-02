@@ -4,7 +4,7 @@ from fastapi_pagination import Params
 from app import schemas
 from app import models
 from app import crud
-from app.api.data import deps as deps
+from app.api.data import deps
 
 from app.schemas.response_schema import (
     IPostResponseBase,
@@ -22,7 +22,7 @@ model = models.Temperature
 read_schema = schemas.ITemperatureRead
 create_schema = schemas.ITemperatureCreate
 crud_repo = crud.temperature
-deps_from_path = deps.get_temperature_by_id_from_path
+deps_by_id = deps.get_temperature_by_id_from_path
 
 
 @router.get("/list")
@@ -39,7 +39,7 @@ async def read_temperature_list(
 @router.get("/{id}")
 async def get_temperature_by_id(
         current: model = Depends(
-            deps_from_path
+            deps_by_id
         ),
 ) -> IGetResponseBase[read_schema]:
     """
@@ -62,7 +62,7 @@ async def create_temperature(
 @router.delete("/{id}")
 async def remove_temperature(
         current: model = Depends(
-            deps_from_path
+            deps_by_id
         ),
 ) -> IDeleteResponseBase[read_schema]:
     """

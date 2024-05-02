@@ -4,15 +4,14 @@ from fastapi_pagination import Params
 from app import schemas
 from app import models
 from app import crud
-from app.api.data import deps as deps
+from app.api.data import deps
 
 from app.schemas.response_schema import (
     IPostResponseBase,
     create_response,
     IGetResponsePaginated,
     IGetResponseBase,
-    IDeleteResponseBase,
-    IPutResponseBase
+    IDeleteResponseBase
 )
 
 router = APIRouter()
@@ -22,7 +21,7 @@ model = models.Color
 read_schema = schemas.IColorRead
 create_schema = schemas.IColorCreate
 crud_repo = crud.color
-deps_from_path = deps.get_color_by_id_from_path
+deps_by_id = deps.get_color_by_id_from_path
 
 
 @router.get("/list")
@@ -36,10 +35,23 @@ async def read_color_list(
     return create_response(data=response)
 
 
+# @router.get("/list_by_HID/")
+# async def read_color_list_by_hardware_id(
+#         current_measurements: list[model] = Depends(
+#             deps_from_path
+#         ),
+#         params: Params = Depends(),
+# ) -> IGetResponsePaginated[read_schema]:
+#     """
+#     Gets a paginated list of color measurements
+#     """
+#     return create_response(data=current_measurements)
+
+
 @router.get("/{id}")
 async def get_color_by_id(
         current: model = Depends(
-            deps_from_path
+            deps_by_id
         ),
 ) -> IGetResponseBase[read_schema]:
     """
@@ -62,7 +74,7 @@ async def create_color(
 @router.delete("/{id}")
 async def remove_color(
         current: model = Depends(
-            deps_from_path
+            deps_by_id
         ),
 ) -> IDeleteResponseBase[read_schema]:
     """
