@@ -1,8 +1,8 @@
 """init
 
-Revision ID: 14dfab389591
+Revision ID: 0843a59fba37
 Revises: 
-Create Date: 2024-04-30 15:50:25.835935
+Create Date: 2024-05-15 19:17:00.791097
 
 """
 from typing import Sequence, Union
@@ -13,7 +13,7 @@ import sqlmodel
 
 
 # revision identifiers, used by Alembic.
-revision: str = '14dfab389591'
+revision: str = '0843a59fba37'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -31,7 +31,7 @@ def upgrade() -> None:
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_Color_id'), 'Color', ['id'], unique=False)
-    op.create_table('FlawAndLevel',
+    op.create_table('FlowAndLevel',
     sa.Column('hardware_id', sqlmodel.sql.sqltypes.AutoString(), nullable=False),
     sa.Column('indication', sqlmodel.sql.sqltypes.AutoString(), nullable=False),
     sa.Column('unit', sqlmodel.sql.sqltypes.AutoString(), nullable=False),
@@ -40,7 +40,7 @@ def upgrade() -> None:
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
-    op.create_index(op.f('ix_FlawAndLevel_id'), 'FlawAndLevel', ['id'], unique=False)
+    op.create_index(op.f('ix_FlowAndLevel_id'), 'FlowAndLevel', ['id'], unique=False)
     op.create_table('Humidity',
     sa.Column('hardware_id', sqlmodel.sql.sqltypes.AutoString(), nullable=False),
     sa.Column('indication', sqlmodel.sql.sqltypes.AutoString(), nullable=False),
@@ -118,8 +118,8 @@ def downgrade() -> None:
     op.drop_table('Light')
     op.drop_index(op.f('ix_Humidity_id'), table_name='Humidity')
     op.drop_table('Humidity')
-    op.drop_index(op.f('ix_FlawAndLevel_id'), table_name='FlawAndLevel')
-    op.drop_table('FlawAndLevel')
+    op.drop_index(op.f('ix_FlowAndLevel_id'), table_name='FlowAndLevel')
+    op.drop_table('FlowAndLevel')
     op.drop_index(op.f('ix_Color_id'), table_name='Color')
     op.drop_table('Color')
     # ### end Alembic commands ###
