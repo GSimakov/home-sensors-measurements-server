@@ -31,6 +31,8 @@ async def get_FAL_graph(
     return FileResponse(
         path=file_path,
         media_type='application/octet-stream',
-        filename=file_name,
+        headers={
+            'filename': file_name
+        },
         background=BackgroundTask(cleanup, file_path)
     )
